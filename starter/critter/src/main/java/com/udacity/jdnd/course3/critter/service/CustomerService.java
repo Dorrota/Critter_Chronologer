@@ -1,9 +1,11 @@
 package com.udacity.jdnd.course3.critter.service;
 
 import com.udacity.jdnd.course3.critter.entity.Customer;
+import com.udacity.jdnd.course3.critter.entity.Pet;
 import com.udacity.jdnd.course3.critter.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,16 +22,30 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public Customer findCustomerById(Long id) {
+        return customerRepository.findById(id).get();
+    }
+
     public Customer save(Customer customer) {
         return customerRepository.save(customer);
     }
 
     public Customer findCustomerByPetId(Long petId){
         //Long customerId = customerRepository.findByPetId(petId);
-        Optional<Customer> optionalCustomer = customerRepository.findById(petId);
-        if (!optionalCustomer.isPresent()){
+        Customer customer = customerRepository.findByPetId(petId);
+        if (customer == null){
             throw new RuntimeException("Oo, no owner present!");
         }
-        return optionalCustomer.get();
+        return customer;
+    }
+
+    public void addPetToCustomer(Pet pet, Customer customer) {
+        List<Pet> petList = customer.getPets();
+        if (petList == null) {
+            petList = new ArrayList<>();
+        }
+        petList.add(pet);
+        // customer.setPets(petList);
+        //customerRepository.save(customer);
     }
 }
