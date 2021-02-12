@@ -23,7 +23,6 @@ public class PetService {
     }
 
     public Pet savePet(Pet pet) {
-
         Customer customer = pet.getCustomer();
         customerService.addPetToCustomer(pet, customer);
         petRepository.save(pet);

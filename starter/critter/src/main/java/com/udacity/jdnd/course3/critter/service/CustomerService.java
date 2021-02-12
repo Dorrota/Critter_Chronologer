@@ -32,7 +32,7 @@ public class CustomerService {
 
     public Customer findCustomerByPetId(Long petId){
         //Long customerId = customerRepository.findByPetId(petId);
-        Customer customer = customerRepository.findByPetId(petId);
+        Customer customer = customerRepository.findByPetsId(petId);
         if (customer == null){
             throw new RuntimeException("Oo, no owner present!");
         }

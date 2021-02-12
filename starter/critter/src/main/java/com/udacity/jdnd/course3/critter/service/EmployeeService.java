@@ -51,7 +51,9 @@ public class EmployeeService {
 //                availableEmployees.add(e);
 //            }
 //        }
-        List<Employee> availableEmployees = employees.stream().filter(employee -> employee.getSkills().containsAll(skills)).collect(Collectors.toList());
+        List<Employee> availableEmployees = employees.stream()
+                .filter(employee -> employee.getSkills().containsAll(skills))
+                .collect(Collectors.toList());
         return availableEmployees;
     }
 }
