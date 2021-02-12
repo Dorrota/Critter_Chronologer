@@ -13,6 +13,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Nationalized
     private String name;
     @Column(length = 15)

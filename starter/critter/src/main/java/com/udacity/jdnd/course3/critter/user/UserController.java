@@ -47,7 +47,6 @@ public class UserController {
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
         Customer customer = customerService.findCustomerByPetId(petId);
-        //throw new UnsupportedOperationException();
         return convertCustomerToCustomerDTO(customer);
     }
 
@@ -66,7 +65,6 @@ public class UserController {
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
         employeeService.setEmployeeAvailability(employeeId, daysAvailable);
-        //throw new UnsupportedOperationException();
     }
 
     @GetMapping("/employee/availability")

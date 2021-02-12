@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +24,11 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).get();
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (!optionalEmployee.isPresent()) {
+            throw new RuntimeException("There is no such employee!");
+        }
+        return optionalEmployee.get();
     }
 
     public Employee saveEmployee(Employee employee) {
@@ -45,12 +46,6 @@ public class EmployeeService {
         Set<DayOfWeek> daysOfWeek = new HashSet<>();
         daysOfWeek.add(dayOfWeek);
         List<Employee> employees = employeeRepository.findByDaysAvailableInAndSkillsIn(daysOfWeek, skills);
-        //List<Employee> availableEmployees = new ArrayList<>();
-//        for (Employee e: employees) {
-//            if (e.getSkills().containsAll(skills)){
-//                availableEmployees.add(e);
-//            }
-//        }
         List<Employee> availableEmployees = employees.stream()
                 .filter(employee -> employee.getSkills().containsAll(skills))
                 .collect(Collectors.toList());

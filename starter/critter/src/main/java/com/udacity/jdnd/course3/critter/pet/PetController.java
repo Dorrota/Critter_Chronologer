@@ -35,14 +35,12 @@ public class PetController {
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
         return convertPetToPetDTO(petService.getPetById(petId));
-       // throw new UnsupportedOperationException();
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
         List<Pet> petList = petService.getAllPets();
         return petList.stream().map(this::convertPetToPetDTO).collect(Collectors.toList());
-        //throw new UnsupportedOperationException();
     }
 
     @GetMapping("/owner/{ownerId}")
@@ -60,7 +58,6 @@ public class PetController {
 
     private Pet convertPetDTOToPet(PetDTO petDTO) {
         Pet pet = new Pet();
-        //copyProperties(petDTO, pet);
         pet.setBirthDate(petDTO.getBirthDate());
         pet.setName(petDTO.getName());
         pet.setNotes(petDTO.getNotes());

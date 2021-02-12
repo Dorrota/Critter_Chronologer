@@ -8,6 +8,7 @@ import java.util.Set;
  * to the database directly.
  */
 public class EmployeeRequestDTO {
+
     private Set<EmployeeSkill> skills;
     private LocalDate date;
 

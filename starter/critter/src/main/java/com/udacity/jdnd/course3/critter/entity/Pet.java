@@ -18,7 +18,7 @@ public class Pet {
     private PetType type;
     @Nationalized
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
     private LocalDate birthDate;
     @Column(length = 300)

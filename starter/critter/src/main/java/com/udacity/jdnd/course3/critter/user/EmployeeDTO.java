@@ -8,6 +8,7 @@ import java.util.Set;
  * to the database directly.
  */
 public class EmployeeDTO {
+
     private long id;
     private String name;
     private Set<EmployeeSkill> skills;

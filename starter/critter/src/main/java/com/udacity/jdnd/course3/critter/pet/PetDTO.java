@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * to the database directly.
  */
 public class PetDTO {
+
     private long id;
     private PetType type;
     private String name;

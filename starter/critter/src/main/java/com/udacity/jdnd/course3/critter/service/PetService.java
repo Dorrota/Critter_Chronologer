@@ -6,6 +6,7 @@ import com.udacity.jdnd.course3.critter.repository.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PetService {
@@ -30,7 +31,11 @@ public class PetService {
     }
 
     public Pet getPetById(Long id) {
-        return petRepository.findById(id).get();
+        Optional<Pet> optionalPet = petRepository.findById(id);
+        if (!optionalPet.isPresent()) {
+            throw new RuntimeException("On no! No such pet!");
+        }
+        return optionalPet.get();
     }
 
     public List<Pet> getAllPets() {

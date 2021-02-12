@@ -25,13 +25,11 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
     private final PetService petService;
     private final EmployeeService employeeService;
-    private final CustomerService customerService;
 
-    public ScheduleController(ScheduleService scheduleService, PetService petService, EmployeeService employeeService, CustomerService customerService) {
+    public ScheduleController(ScheduleService scheduleService, PetService petService, EmployeeService employeeService) {
         this.scheduleService = scheduleService;
         this.petService = petService;
         this.employeeService = employeeService;
-        this.customerService = customerService;
     }
 
     @PostMapping
@@ -68,15 +66,8 @@ public class ScheduleController {
         List<Schedule> schedules = new ArrayList<>();
         for (Pet p : pets){
             schedules.addAll(scheduleService.getScheduleForPet(p));
-            System.out.println("Petttttttttttt" + p.getId());
         }
-        List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
-        for (Schedule s: schedules){
-            scheduleDTOS.add(convertScheduleToScheduleDTO(s));
-        }
-        return scheduleDTOS;
-        //return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
-        //throw new UnsupportedOperationException();
+        return schedules.stream().map(this::convertScheduleToScheduleDTO).collect(Collectors.toList());
     }
 
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule) {

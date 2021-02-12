@@ -18,8 +18,7 @@ public class ScheduleService {
     }
 
     public Schedule saveSchedule(Schedule schedule) {
-        scheduleRepository.save(schedule);
-        return null;
+        return scheduleRepository.save(schedule);
     }
 
     public List<Schedule> getAllSchedules() {

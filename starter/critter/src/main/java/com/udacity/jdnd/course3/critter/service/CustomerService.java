@@ -23,7 +23,11 @@ public class CustomerService {
     }
 
     public Customer findCustomerById(Long id) {
-        return customerRepository.findById(id).get();
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        if (!optionalCustomer.isPresent()) {
+            throw new RuntimeException("There is no such man!");
+        }
+        return optionalCustomer.get();
     }
 
     public Customer save(Customer customer) {
@@ -31,7 +35,6 @@ public class CustomerService {
     }
 
     public Customer findCustomerByPetId(Long petId){
-        //Long customerId = customerRepository.findByPetId(petId);
         Customer customer = customerRepository.findByPetsId(petId);
         if (customer == null){
             throw new RuntimeException("Oo, no owner present!");
@@ -45,7 +48,5 @@ public class CustomerService {
             petList = new ArrayList<>();
         }
         petList.add(pet);
-        // customer.setPets(petList);
-        //customerRepository.save(customer);
     }
 }
